@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bwlk.mapper.t_dormMapper" > 
+  <resultMap id="BaseResultMap" type="com.bwlk.pojo.t_dorm" >
+    <id column="dormId" property="dormId" jdbcType="INTEGER" />
+    <result column="dormBuildId" property="dormBuildId" jdbcType="INTEGER" />
+    <result column="dormName" property="dormName" jdbcType="VARCHAR" />
+    <result column="dormType" property="dormType" jdbcType="VARCHAR" />
+    <result column="dormNumber" property="dormNumber" jdbcType="INTEGER" />
+    <result column="dormTel" property="dormTel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    dormId, dormBuildId, dormName, dormType, dormNumber, dormTel
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bwlk.pojo.t_dormExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_dorm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_dorm
+    where dormId = #{dormId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_dorm
+    where dormId = #{dormId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bwlk.pojo.t_dormExample" >
+    delete from t_dorm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bwlk.pojo.t_dorm" >
+    insert into t_dorm (dormId, dormBuildId, dormName, 
+      dormType, dormNumber, dormTel
+      )
+    values (#{dormId,jdbcType=INTEGER}, #{dormBuildId,jdbcType=INTEGER}, #{dormName,jdbcType=VARCHAR}, 
+      #{dormType,jdbcType=VARCHAR}, #{dormNumber,jdbcType=INTEGER}, #{dormTel,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bwlk.pojo.t_dorm" >
+    insert into t_dorm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dormId != null" >
+        dormId,
+      </if>
+      <if test="dormBuildId != null" >
+        dormBuildId,
+      </if>
+      <if test="dormName != null" >
+        dormName,
+      </if>
+      <if test="dormType != null" >
+        dormType,
+      </if>
+      <if test="dormNumber != null" >
+        dormNumber,
+      </if>
+      <if test="dormTel != null" >
+        dormTel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dormId != null" >
+        #{dormId,jdbcType=INTEGER},
+      </if>
+      <if test="dormBuildId != null" >
+        #{dormBuildId,jdbcType=INTEGER},
+      </if>
+      <if test="dormName != null" >
+        #{dormName,jdbcType=VARCHAR},
+      </if>
+      <if test="dormType != null" >
+        #{dormType,jdbcType=VARCHAR},
+      </if>
+      <if test="dormNumber != null" >
+        #{dormNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dormTel != null" >
+        #{dormTel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bwlk.pojo.t_dormExample" resultType="java.lang.Integer" >
+    select count(*) from t_dorm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_dorm
+    <set >
+      <if test="record.dormId != null" >
+        dormId = #{record.dormId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dormBuildId != null" >
+        dormBuildId = #{record.dormBuildId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dormName != null" >
+        dormName = #{record.dormName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dormType != null" >
+        dormType = #{record.dormType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dormNumber != null" >
+        dormNumber = #{record.dormNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.dormTel != null" >
+        dormTel = #{record.dormTel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_dorm
+    set dormId = #{record.dormId,jdbcType=INTEGER},
+      dormBuildId = #{record.dormBuildId,jdbcType=INTEGER},
+      dormName = #{record.dormName,jdbcType=VARCHAR},
+      dormType = #{record.dormType,jdbcType=VARCHAR},
+      dormNumber = #{record.dormNumber,jdbcType=INTEGER},
+      dormTel = #{record.dormTel,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bwlk.pojo.t_dorm" >
+    update t_dorm
+    <set >
+      <if test="dormBuildId != null" >
+        dormBuildId = #{dormBuildId,jdbcType=INTEGER},
+      </if>
+      <if test="dormName != null" >
+        dormName = #{dormName,jdbcType=VARCHAR},
+      </if>
+      <if test="dormType != null" >
+        dormType = #{dormType,jdbcType=VARCHAR},
+      </if>
+      <if test="dormNumber != null" >
+        dormNumber = #{dormNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dormTel != null" >
+        dormTel = #{dormTel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dormId = #{dormId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bwlk.pojo.t_dorm" >
+    update t_dorm
+    set dormBuildId = #{dormBuildId,jdbcType=INTEGER},
+      dormName = #{dormName,jdbcType=VARCHAR},
+      dormType = #{dormType,jdbcType=VARCHAR},
+      dormNumber = #{dormNumber,jdbcType=INTEGER},
+      dormTel = #{dormTel,jdbcType=VARCHAR}
+    where dormId = #{dormId,jdbcType=INTEGER}
+  </update>
+</mapper>

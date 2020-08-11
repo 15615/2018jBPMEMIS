@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process name="test" xmlns="http://jbpm.org/4.4/jpdl">
+   <start g="562,59,48,48" name="start1">
+      <transition g="-69,-21" name="申请报修" to="申请报修"/>
+   </start>
+   <end g="563,539,48,48" name="end1"/>
+   <task assignee="#{application}" g="534,165,101,56" name="申请报修">
+   		 <assignment-handler class="com.bwlk.utils.MyApplicationHandler"></assignment-handler>
+      <transition g="-44,-11" name="批准" to="管理员审批"/>
+   </task>
+   <task assignee="admin" g="538,285,98,55" name="管理员审批">
+      <transition g="-46,-11" name="批准" to="维修员维修"/>
+   </task>
+   <task assignee="repair" g="538,425,98,59" name="维修员维修">
+      <transition g="-62,-25" name="to end1" to="end1"/>
+   </task>
+</process>

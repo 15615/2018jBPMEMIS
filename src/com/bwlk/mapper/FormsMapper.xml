@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bwlk.mapper.FormsMapper" >
+  <resultMap id="BaseResultMap" type="com.bwlk.pojo.Forms" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="processInstanceId" property="processinstanceid" jdbcType="VARCHAR" />
+    <result column="processdId" property="processdid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="lou" property="lou" jdbcType="VARCHAR" />
+    <result column="susheId" property="susheid" jdbcType="VARCHAR" />
+    <result column="classes" property="classes" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="huifu1" property="huifu1" jdbcType="VARCHAR" />
+    <result column="huifu2" property="huifu2" jdbcType="VARCHAR" />
+    <result column="huifu3" property="huifu3" jdbcType="VARCHAR" />
+    <result column="states" property="states" jdbcType="INTEGER" />
+    <result column="beizhu1" property="beizhu1" jdbcType="VARCHAR" />
+    <result column="beizhu2" property="beizhu2" jdbcType="VARCHAR" />
+    <result column="beizhu3" property="beizhu3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, processInstanceId, processdId, name, username, lou, susheId, classes, reason, 
+    huifu1, huifu2, huifu3, states, beizhu1, beizhu2, beizhu3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bwlk.pojo.FormsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from forms
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from forms
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from forms
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bwlk.pojo.FormsExample" >
+    delete from forms
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bwlk.pojo.Forms" >
+    insert into forms (id, processInstanceId, processdId, 
+      name, username, lou, 
+      susheId, classes, reason, 
+      huifu1, huifu2, huifu3, 
+      states, beizhu1, beizhu2, 
+      beizhu3)
+    values (#{id,jdbcType=INTEGER}, #{processinstanceid,jdbcType=VARCHAR}, #{processdid,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{lou,jdbcType=VARCHAR}, 
+      #{susheid,jdbcType=VARCHAR}, #{classes,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{huifu1,jdbcType=VARCHAR}, #{huifu2,jdbcType=VARCHAR}, #{huifu3,jdbcType=VARCHAR}, 
+      #{states,jdbcType=INTEGER}, #{beizhu1,jdbcType=VARCHAR}, #{beizhu2,jdbcType=VARCHAR}, 
+      #{beizhu3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bwlk.pojo.Forms" >
+    insert into forms
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="processinstanceid != null" >
+        processInstanceId,
+      </if>
+      <if test="processdid != null" >
+        processdId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="lou != null" >
+        lou,
+      </if>
+      <if test="susheid != null" >
+        susheId,
+      </if>
+      <if test="classes != null" >
+        classes,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="huifu1 != null" >
+        huifu1,
+      </if>
+      <if test="huifu2 != null" >
+        huifu2,
+      </if>
+      <if test="huifu3 != null" >
+        huifu3,
+      </if>
+      <if test="states != null" >
+        states,
+      </if>
+      <if test="beizhu1 != null" >
+        beizhu1,
+      </if>
+      <if test="beizhu2 != null" >
+        beizhu2,
+      </if>
+      <if test="beizhu3 != null" >
+        beizhu3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="processinstanceid != null" >
+        #{processinstanceid,jdbcType=VARCHAR},
+      </if>
+      <if test="processdid != null" >
+        #{processdid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="lou != null" >
+        #{lou,jdbcType=VARCHAR},
+      </if>
+      <if test="susheid != null" >
+        #{susheid,jdbcType=VARCHAR},
+      </if>
+      <if test="classes != null" >
+        #{classes,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="huifu1 != null" >
+        #{huifu1,jdbcType=VARCHAR},
+      </if>
+      <if test="huifu2 != null" >
+        #{huifu2,jdbcType=VARCHAR},
+      </if>
+      <if test="huifu3 != null" >
+        #{huifu3,jdbcType=VARCHAR},
+      </if>
+      <if test="states != null" >
+        #{states,jdbcType=INTEGER},
+      </if>
+      <if test="beizhu1 != null" >
+        #{beizhu1,jdbcType=VARCHAR},
+      </if>
+      <if test="beizhu2 != null" >
+        #{beizhu2,jdbcType=VARCHAR},
+      </if>
+      <if test="beizhu3 != null" >
+        #{beizhu3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bwlk.pojo.FormsExample" resultType="java.lang.Integer" >
+    select count(*) from forms
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update forms
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.processinstanceid != null" >
+        processInstanceId = #{record.processinstanceid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processdid != null" >
+        processdId = #{record.processdid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lou != null" >
+        lou = #{record.lou,jdbcType=VARCHAR},
+      </if>
+      <if test="record.susheid != null" >
+        susheId = #{record.susheid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classes != null" >
+        classes = #{record.classes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.huifu1 != null" >
+        huifu1 = #{record.huifu1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.huifu2 != null" >
+        huifu2 = #{record.huifu2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.huifu3 != null" >
+        huifu3 = #{record.huifu3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.states != null" >
+        states = #{record.states,jdbcType=INTEGER},
+      </if>
+      <if test="record.beizhu1 != null" >
+        beizhu1 = #{record.beizhu1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beizhu2 != null" >
+        beizhu2 = #{record.beizhu2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beizhu3 != null" >
+        beizhu3 = #{record.beizhu3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update forms
+    set id = #{record.id,jdbcType=INTEGER},
+      processInstanceId = #{record.processinstanceid,jdbcType=VARCHAR},
+      processdId = #{record.processdid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      lou = #{record.lou,jdbcType=VARCHAR},
+      susheId = #{record.susheid,jdbcType=VARCHAR},
+      classes = #{record.classes,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      huifu1 = #{record.huifu1,jdbcType=VARCHAR},
+      huifu2 = #{record.huifu2,jdbcType=VARCHAR},
+      huifu3 = #{record.huifu3,jdbcType=VARCHAR},
+      states = #{record.states,jdbcType=INTEGER},
+      beizhu1 = #{record.beizhu1,jdbcType=VARCHAR},
+      beizhu2 = #{record.beizhu2,jdbcType=VARCHAR},
+      beizhu3 = #{record.beizhu3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bwlk.pojo.Forms" >
+    update forms
+    <set >
+      <if test="processinstanceid != null" >
+        processInstanceId = #{processinstanceid,jdbcType=VARCHAR},
+      </if>
+      <if test="processdid != null" >
+        processdId = #{processdid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="lou != null" >
+        lou = #{lou,jdbcType=VARCHAR},
+      </if>
+      <if test="susheid != null" >
+        susheId = #{susheid,jdbcType=VARCHAR},
+      </if>
+      <if test="classes != null" >
+        classes = #{classes,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="huifu1 != null" >
+        huifu1 = #{huifu1,jdbcType=VARCHAR},
+      </if>
+      <if test="huifu2 != null" >
+        huifu2 = #{huifu2,jdbcType=VARCHAR},
+      </if>
+      <if test="huifu3 != null" >
+        huifu3 = #{huifu3,jdbcType=VARCHAR},
+      </if>
+      <if test="states != null" >
+        states = #{states,jdbcType=INTEGER},
+      </if>
+      <if test="beizhu1 != null" >
+        beizhu1 = #{beizhu1,jdbcType=VARCHAR},
+      </if>
+      <if test="beizhu2 != null" >
+        beizhu2 = #{beizhu2,jdbcType=VARCHAR},
+      </if>
+      <if test="beizhu3 != null" >
+        beizhu3 = #{beizhu3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bwlk.pojo.Forms" >
+    update forms
+    set processInstanceId = #{processinstanceid,jdbcType=VARCHAR},
+      processdId = #{processdid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      lou = #{lou,jdbcType=VARCHAR},
+      susheId = #{susheid,jdbcType=VARCHAR},
+      classes = #{classes,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      huifu1 = #{huifu1,jdbcType=VARCHAR},
+      huifu2 = #{huifu2,jdbcType=VARCHAR},
+      huifu3 = #{huifu3,jdbcType=VARCHAR},
+      states = #{states,jdbcType=INTEGER},
+      beizhu1 = #{beizhu1,jdbcType=VARCHAR},
+      beizhu2 = #{beizhu2,jdbcType=VARCHAR},
+      beizhu3 = #{beizhu3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
